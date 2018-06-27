@@ -14,5 +14,8 @@
     },
     "autoload" : {
          "classmap": [ "src/"]
+    },
+    "require-dev": {
+        "FriendsOfPHP/PHP-CS-Fixer": "^2.12"
     }
 }

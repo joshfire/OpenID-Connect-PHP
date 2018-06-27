@@ -1,0 +1,4 @@
+# This is a lib, do not lock deps
+composer.lock
+.DS_Store
+vendor/

@@ -635,7 +635,7 @@ class OpenIDConnectClient
      * Requests a resource owner token
      * (Defined in https://tools.ietf.org/html/rfc6749#section-4.3).
      *
-     * @param $bClientAuth boolean Indicates that the Client ID and Secret be used for client authentication
+     * @param boolean $bClientAuth  Indicates that the Client ID and Secret be used for client authentication
      */
     public function requestResourceOwnerToken($bClientAuth = false)
     {
@@ -703,7 +703,6 @@ class OpenIDConnectClient
     /**
      * Requests Access token with refresh token.
      *
-     * @param $code
      * @param mixed $refresh_token
      *
      * @return mixed
@@ -842,7 +841,7 @@ class OpenIDConnectClient
     }
 
     /**
-     * @param $jwt string encoded JWT
+     * @param string $jwt  encoded JWT
      *
      * @throws OpenIDConnectClientException
      *
@@ -924,8 +923,8 @@ class OpenIDConnectClient
     }
 
     /**
-     * @param $jwt string encoded JWT
-     * @param int $section the section we would like to decode
+     * @param string $jwt  encoded JWT
+     * @param int    $section the section we would like to decode
      *
      * @return object
      */
@@ -968,7 +967,8 @@ class OpenIDConnectClient
 
         $user_info_endpoint .= '?schema='.$schema;
 
-        //The accessToken has to be send in the Authorization header, so we create a new array with only this header.
+        // The accessToken has to be send in the Authorization header,
+        // so we create a new array with only this header.
         $headers = ["Authorization: Bearer {$this->accessToken}"];
 
         $user_json = json_decode($this->fetchURL($user_info_endpoint, null, $headers));
@@ -1013,9 +1013,9 @@ class OpenIDConnectClient
     }
 
     /**
-     * @param $url
-     * @param null    $post_body string If this is set the post type will be POST
-     * @param array() $headers   Extra headers to be send with the request. Format as 'NameHeader: ValueHeader'
+     * @param string       $url
+     * @param string|null  $post_body string If this is set the post type will be POST
+     * @param array()      $headers   Extra headers to be send with the request. Format as 'NameHeader: ValueHeader'
      *
      * @throws OpenIDConnectClientException
      *
@@ -1029,7 +1029,7 @@ class OpenIDConnectClient
         // Determine whether this is a GET or POST
         if (null != $post_body) {
             // curl_setopt($ch, CURLOPT_POST, 1);
-            // Alows to keep the POST method even after redirect
+            // Allows to keep the POST method even after redirect
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
             curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
 
@@ -1046,7 +1046,7 @@ class OpenIDConnectClient
             $headers[] = 'Content-Length: '.strlen($post_body);
         }
 
-        // If we set some heaers include them
+        // If we set some headers include them
         if (count($headers) > 0) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }

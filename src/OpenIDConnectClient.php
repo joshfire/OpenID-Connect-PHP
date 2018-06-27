@@ -120,6 +120,11 @@ class OpenIDConnectClient
     private $httpProxy;
 
     /**
+     * @var string user agent used for the requests
+     */
+    private $userAgent;
+
+    /**
      * @var string full system path to the SSL certificate
      */
     private $certPath;
@@ -1051,6 +1056,10 @@ class OpenIDConnectClient
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         }
 
+        if($this->userAgent) {
+            curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
+        }
+
         // Should cURL return or print out the data? (true = return, false = print)
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
@@ -1117,6 +1126,13 @@ class OpenIDConnectClient
      */
     public function setHttpProxy($httpProxy) {
         $this->httpProxy = $httpProxy;
+    }
+
+    /**
+     * @param $userAgent
+     */
+    public function setUserAgent($userAgent) {
+        $this->userAgent = $userAgent;
     }
 
     /**
